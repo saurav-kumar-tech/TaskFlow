@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="PASTE_YOUR_LIVE_LINK_HERE">🌐 Live Demo</a> •
+  <a href="https://saurav-kumar-tech.github.io/TaskFlow/">🌐 Live Demo</a> •
   <a href="#-screenshots">📸 Screenshots</a> •
   <a href="#-installation--setup">⚙️ Installation</a>
 </p>
@@ -256,7 +256,7 @@ TaskFlow/
   </a>
 </p>
 
-**Live URL:** `PASTE_YOUR_LIVE_LINK_HERE`
+**Live URL:** `https://saurav-kumar-tech.github.io/TaskFlow/`
 
 > Replace the placeholder with your actual deployed application URL when hosting is ready. A GitHub repository link alone does not deploy the Spring Boot backend or MySQL database.
 
