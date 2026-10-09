@@ -1,0 +1,36 @@
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+
+# Java
+*.class
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+application-local.properties
+application-secrets.properties
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Database backups and exports
+*.sql
+*.dump
+*.bak
+
+# Local configuration
+secrets.properties
+
+error.txt

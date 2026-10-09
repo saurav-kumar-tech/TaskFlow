@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow — Task Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ================= AUTH SCREEN ================= -->
+<div id="authScreen" class="auth-screen">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+
+  <div class="auth-card">
+    <div class="brand-mark">
+      <div class="logo-dot"></div>
+      <span>TaskFlow</span>
+    </div>
+    <h1>Welcome back 👋</h1>
+    <p class="subtitle">Your tasks, beautifully organized.</p>
+
+    <div class="tabs" data-active="login">
+      <button class="tab active" data-tab="login">Sign In</button>
+      <button class="tab" data-tab="register">Create Account</button>
+      <div class="tab-indicator"></div>
+    </div>
+
+    <form id="loginForm" class="auth-form">
+      <div class="field">
+        <span class="field-icon">👤</span>
+        <input type="text" id="loginUsername" placeholder="Username" required autocomplete="username">
+      </div>
+      <div class="field">
+        <span class="field-icon">🔒</span>
+        <input type="password" id="loginPassword" placeholder="Password" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="primary big">Sign In →</button>
+    </form>
+
+    <form id="registerForm" class="auth-form hidden">
+      <div class="field">
+        <span class="field-icon">👤</span>
+        <input type="text" id="registerUsername" placeholder="Username" required minlength="3" maxlength="50">
+      </div>
+      <div class="field">
+        <span class="field-icon">✉️</span>
+        <input type="email" id="registerEmail" placeholder="Email address" required>
+      </div>
+      <div class="field">
+        <span class="field-icon">🔒</span>
+        <input type="password" id="registerPassword" placeholder="Password (min 6 chars)" required minlength="6">
+      </div>
+      <button type="submit" class="primary big">Create Account →</button>
+    </form>
+
+    <p id="authError" class="error hidden"></p>
+
+    <p class="auth-foot">Secured with JWT • Real-time updates</p>
+  </div>
+</div>
+
+<!-- ================= APP SCREEN ================= -->
+<div id="appScreen" class="app-screen hidden">
+
+  <aside class="sidebar">
+    <div class="brand-mark small">
+      <div class="logo-dot"></div>
+      <span>TaskFlow</span>
+    </div>
+
+    <nav class="side-nav">
+      <a class="nav-item active" data-view="dashboard"><span class="nav-ico">🏠</span> Dashboard</a>
+      <a class="nav-item" data-view="tasks"><span class="nav-ico">📋</span> My Tasks</a>
+      <a class="nav-item" data-view="analytics"><span class="nav-ico">📊</span> Analytics</a>
+      <a class="nav-item" data-view="settings"><span class="nav-ico">⚙️</span> Settings</a>
+    </nav>
+
+    <div class="side-foot">
+      <div class="avatar" id="sideAvatar">?</div>
+      <div>
+        <div class="side-name" id="sideName">—</div>
+        <div class="side-role">Free Plan</div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div>
+        <h2 class="page-title" id="pageTitle">Dashboard</h2>
+        <p class="page-sub" id="pageSub">Here's what's on your plate today</p>
+      </div>
+      <div class="user-actions">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme">🌙</button>
+        <span id="welcomeUser" class="pill-user"></span>
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+    </header>
+
+    <main class="container">
+
+      <!-- Stats (visible on dashboard only) -->
+      <section class="stats" id="statsSection">
+        <div class="stat-card stat-total">
+          <div class="stat-ico">📊</div>
+          <div>
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-label">Total Tasks</div>
+          </div>
+        </div>
+        <div class="stat-card stat-pending">
+          <div class="stat-ico">⏳</div>
+          <div>
+            <div class="stat-value" id="statPending">0</div>
+            <div class="stat-label">Pending</div>
+          </div>
+        </div>
+        <div class="stat-card stat-progress">
+          <div class="stat-ico">🚀</div>
+          <div>
+            <div class="stat-value" id="statProgress">0</div>
+            <div class="stat-label">In Progress</div>
+          </div>
+        </div>
+        <div class="stat-card stat-done">
+          <div class="stat-ico">✅</div>
+          <div>
+            <div class="stat-value" id="statCompleted">0</div>
+            <div class="stat-label">Completed</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Toolbar (visible on dashboard & tasks) -->
+      <section class="toolbar" id="toolbarSection">
+        <div class="search-wrap">
+          <span class="search-ico">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search tasks by title, tag, category...">
+        </div>
+        <select id="filterStatus">
+          <option value="">All Statuses</option>
+          <option value="PENDING">⏳ Pending</option>
+          <option value="IN_PROGRESS">🚀 In Progress</option>
+          <option value="COMPLETED">✅ Completed</option>
+        </select>
+        <select id="filterPriority">
+          <option value="">All Priorities</option>
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+          <option value="HIGH">High</option>
+        </select>
+        <button id="addTaskBtn" class="primary">＋ New Task</button>
+      </section>
+
+      <!-- Task List (dashboard & tasks) -->
+      <section id="taskList" class="task-list"></section>
+
+      <div id="emptyState" class="empty-state hidden">
+        <div class="empty-emoji">🎯</div>
+        <h3>No tasks yet</h3>
+        <p>Click "＋ New Task" to create your first task.</p>
+      </div>
+
+      <!-- ================= ANALYTICS VIEW ================= -->
+<div id="viewAnalytics" class="hidden">
+
+  <!-- Analytics Summary -->
+  <section class="analytics-stats">
+
+    <div class="analytics-card">
+      <div class="analytics-icon total">📊</div>
+      <div>
+        <div class="analytics-value" id="analyticsTotal">0</div>
+        <div class="analytics-label">Total Tasks</div>
+      </div>
+    </div>
+
+    <div class="analytics-card">
+      <div class="analytics-icon completed">✅</div>
+      <div>
+        <div class="analytics-value" id="analyticsCompleted">0</div>
+        <div class="analytics-label">Completed</div>
+      </div>
+    </div>
+
+    <div class="analytics-card">
+      <div class="analytics-icon pending">⏳</div>
+      <div>
+        <div class="analytics-value" id="analyticsPending">0</div>
+        <div class="analytics-label">Pending</div>
+      </div>
+    </div>
+
+    <div class="analytics-card">
+      <div class="analytics-icon overdue">⚠️</div>
+      <div>
+        <div class="analytics-value" id="analyticsOverdue">0</div>
+        <div class="analytics-label">Overdue</div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- Productivity + Completion -->
+  <section class="analytics-grid">
+
+    <!-- Weekly Productivity -->
+    <div class="analytics-panel productivity-panel">
+
+      <div class="analytics-panel-head">
+        <div>
+          <h3>Weekly Productivity</h3>
+          <p>Task completion activity</p>
+        </div>
+
+        <div class="analytics-toggle">
+          <button id="weekBtn" class="active">This Week</button>
+          <button id="monthBtn">This Month</button>
+        </div>
+      </div>
+
+      <div class="chart">
+        <div class="chart-y">
+          <span>100%</span>
+          <span>75%</span>
+          <span>50%</span>
+          <span>25%</span>
+          <span>0%</span>
+        </div>
+
+        <div class="chart-area">
+
+          <div class="chart-grid-line line-100"></div>
+          <div class="chart-grid-line line-75"></div>
+          <div class="chart-grid-line line-50"></div>
+          <div class="chart-grid-line line-25"></div>
+          <div class="chart-grid-line line-0"></div>
+
+          <div class="chart-columns">
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:35%"></div>
+              <span>Mon</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:55%"></div>
+              <span>Tue</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:45%"></div>
+              <span>Wed</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:75%"></div>
+              <span>Thu</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:90%"></div>
+              <span>Fri</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:60%"></div>
+              <span>Sat</span>
+            </div>
+
+            <div class="chart-column">
+              <div class="chart-bar" style="height:25%"></div>
+              <span>Sun</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- Completion -->
+    <div class="analytics-panel completion-panel">
+
+      <div class="analytics-panel-head">
+        <div>
+          <h3>Task Completion</h3>
+          <p>Overall completion rate</p>
+        </div>
+      </div>
+
+      <div class="completion-circle" id="completionCircle">
+        <div class="completion-circle-inner">
+          <strong id="completionRate">0%</strong>
+          <span>Completed</span>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Task Performance -->
+  <section class="analytics-panel performance-panel">
+
+    <div class="analytics-panel-head">
+      <div>
+        <h3>Task Performance</h3>
+        <p>Overview of your current task status</p>
+      </div>
+    </div>
+
+    <div class="performance-list">
+
+      <div class="performance-row">
+        <div class="performance-info">
+          <span>Completed</span>
+          <strong id="performanceCompleted">0</strong>
+        </div>
+        <div class="performance-track">
+          <div id="performanceCompletedBar" class="performance-fill completed-fill"></div>
+        </div>
+      </div>
+
+      <div class="performance-row">
+        <div class="performance-info">
+          <span>In Progress</span>
+          <strong id="performanceProgress">0</strong>
+        </div>
+        <div class="performance-track">
+          <div id="performanceProgressBar" class="performance-fill progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="performance-row">
+        <div class="performance-info">
+          <span>Pending</span>
+          <strong id="performancePending">0</strong>
+        </div>
+        <div class="performance-track">
+          <div id="performancePendingBar" class="performance-fill pending-fill"></div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+      <!-- Settings View (hidden by default) -->
+      <div id="viewSettings" class="hidden">
+        <div class="settings-grid">
+          <div class="settings-card">
+            <h3>👤 Account</h3>
+            <div class="settings-row">
+              <span>Username</span>
+              <strong id="settingsUsername">—</strong>
+            </div>
+            <div class="settings-row">
+              <span>Email</span>
+              <strong id="settingsEmail">—</strong>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3>🎨 Appearance</h3>
+            <div class="settings-row">
+              <span>Theme</span>
+              <button id="themeToggleSettings" class="ghost-btn">Toggle Theme</button>
+            </div>
+          </div>
+
+          <div class="settings-card">
+            <h3>🚪 Session</h3>
+            <div class="settings-row">
+              <span>Sign out from this device</span>
+              <button id="logoutSettings" class="ghost-btn danger">Logout</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ================= TASK MODAL ================= -->
+<div id="taskModal" class="modal hidden">
+  <div class="modal-content">
+    <div class="modal-head">
+      <h2 id="modalTitle">New Task</h2>
+      <button type="button" class="modal-close" id="cancelTaskX">✕</button>
+    </div>
+    <form id="taskForm">
+      <input type="hidden" id="taskId">
+      <label>Title
+        <input type="text" id="taskTitle" required maxlength="200" placeholder="What needs to be done?">
+      </label>
+      <label>Description
+        <textarea id="taskDescription" rows="3" maxlength="2000" placeholder="Add more details..."></textarea>
+      </label>
+      <div class="row">
+        <label>Status
+          <select id="taskStatus">
+            <option value="PENDING">⏳ Pending</option>
+            <option value="IN_PROGRESS">🚀 In Progress</option>
+            <option value="COMPLETED">✅ Completed</option>
+          </select>
+        </label>
+        <label>Priority
+          <select id="taskPriority">
+            <option value="LOW">🟢 Low</option>
+            <option value="MEDIUM" selected>🟡 Medium</option>
+            <option value="HIGH">🔴 High</option>
+          </select>
+        </label>
+      </div>
+      <div class="row">
+        <label>Due Date
+          <input type="date" id="taskDueDate">
+        </label>
+        <label>Category
+          <input type="text" id="taskCategory" maxlength="80" placeholder="Work, Personal...">
+        </label>
+      </div>
+      <label>Tags <span class="hint">comma separated</span>
+        <input type="text" id="taskTags" maxlength="500" placeholder="urgent, home, q4">
+      </label>
+      <div class="modal-actions">
+        <button type="button" id="cancelTask">Cancel</button>
+        <button type="submit" class="primary">Save Task</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
