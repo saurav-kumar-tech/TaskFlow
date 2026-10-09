@@ -8,43 +8,34 @@
 </p>
 
 <p align="center">
-  <strong>A modern task management system designed to organize tasks, manage priorities, and track productivity through an intuitive web interface.</strong>
+  <strong>A modern task management application designed to organize daily work, manage priorities, and track productivity through an intuitive web interface.</strong>
 </p>
 
 <p align="center">
-  <a href="https://saurav-kumar-tech.github.io/TaskFlow/">
-    <img src="https://img.shields.io/badge/🌐_LIVE_DEMO-Open%20TaskFlow-2563EB?style=for-the-badge" alt="Live Demo"/>
-  </a>
-  <a href="https://github.com/saurav-kumar-tech/TaskFlow">
-    <img src="https://img.shields.io/badge/GitHub-Source%20Code-181717?style=for-the-badge&logo=github" alt="Source Code"/>
-  </a>
-</p>
-
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-screenshots">Screenshots</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-installation--setup">Installation</a>
+  <a href="https://github.com/saurav-kumar-tech/TaskFlow">📂 View Repository</a> •
+  <a href="#-features">✨ Features</a> •
+  <a href="#-screenshots">📸 Screenshots</a> •
+  <a href="#-installation--setup">⚙️ Installation</a>
 </p>
 
 ---
 
 ## 📌 Overview
 
-**TaskFlow** is a full-stack task management application developed using Java, Spring Boot, MySQL, and web technologies.
+**TaskFlow** is a full-stack task management application built using Java, Spring Boot, MySQL, and web technologies.
 
-It provides a centralized workspace to organize daily tasks, manage priorities, monitor progress, and review productivity analytics.
+It provides a centralized workspace for organizing tasks, managing priorities, monitoring progress, and reviewing productivity analytics.
 
-The project demonstrates the integration of frontend development, backend services, relational database management, and authentication in a single application.
+The project combines frontend development, backend services, database integration, and authentication to demonstrate the development of a structured web application.
 
 ### 🎯 Project Objectives
 
 - Simplify everyday task management.
 - Organize tasks and priorities efficiently.
-- Track task progress through a dashboard.
+- Track task progress through a centralized dashboard.
 - Store application data using MySQL.
 - Implement authentication and backend security.
-- Build a clean and user-friendly interface.
+- Provide a clean and intuitive user interface.
 
 ---
 
@@ -54,20 +45,46 @@ The project demonstrates the integration of frontend development, backend servic
 |---|---|
 | 🔐 User Authentication | Registration and login functionality |
 | 🛡️ JWT Security | Token-based authentication support |
-| 📊 Dashboard | Centralized task overview |
+| 📊 Dashboard | Centralized overview of task information |
 | ✅ Task Management | Create, view, update, and manage tasks |
 | 🎯 Priority Management | Organize tasks according to priority |
 | 📈 Analytics | Review task progress and productivity information |
-| ⚙️ Settings | Application preferences and settings |
+| ⚙️ Settings | Access application preferences and settings |
 | 🔔 WebSocket Support | Backend support for real-time notifications |
 | 🗄️ Database Integration | Persistent data storage using MySQL |
 | 🎨 Web Interface | HTML, CSS, and JavaScript-based frontend |
 
 ---
 
-## 🖥️ Screenshots
+## 🛠️ Tech Stack
 
-Explore the TaskFlow interface.
+### Backend
+- **Java** — Core programming language
+- **Spring Boot** — Backend application framework
+- **Spring Security** — Security configuration
+- **JWT** — Token-based authentication
+- **Spring Data JPA / Hibernate** — Database access and ORM
+- **WebSocket** — Real-time communication support
+- **Maven** — Dependency and build management
+
+### Frontend
+- **HTML5** — Page structure
+- **CSS3** — Styling and layout
+- **JavaScript** — Client-side interactions
+
+### Database
+- **MySQL** — Relational database
+
+### Development Tools
+- Visual Studio Code
+- Git and GitHub
+- Apache Maven
+
+---
+
+## 📸 Screenshots
+
+Explore the TaskFlow interface through the screenshots below.
 
 ### 1. 🔐 Login Page
 
@@ -111,39 +128,13 @@ Explore the TaskFlow interface.
 
 ---
 
-## 🛠️ Tech Stack
-
-### Backend
-- **Java** — Core programming language
-- **Spring Boot** — Backend framework
-- **Spring Security** — Security configuration
-- **JWT** — Token-based authentication
-- **Spring Data JPA / Hibernate** — Database access and ORM
-- **WebSocket** — Real-time communication support
-- **Maven** — Dependency and build management
-
-### Frontend
-- **HTML5** — Page structure
-- **CSS3** — Styling and layout
-- **JavaScript** — Client-side interactions
-
-### Database
-- **MySQL** — Relational database
-
-### Tools
-- Visual Studio Code
-- Git and GitHub
-- Apache Maven
-
----
-
 ## ⚙️ Installation & Setup
 
-Follow these steps to run TaskFlow on your local machine.
+Follow these steps to run TaskFlow locally.
 
 ### Prerequisites
 
-Install the following:
+Install the following software:
 
 - Java JDK
 - Apache Maven
@@ -167,22 +158,22 @@ CREATE DATABASE task_manager;
 
 ### Step 3: Configure Environment Variables
 
-The application uses environment variables for database credentials and the JWT signing secret.
+TaskFlow reads its database settings and JWT signing secret from environment variables.
 
 | Variable | Purpose |
 |---|---|
 | `DB_URL` | MySQL connection URL |
-| `DB_USERNAME` | Database username |
-| `DB_PASSWORD` | Database password |
-| `JWT_SECRET` | JWT signing secret |
+| `DB_USERNAME` | MySQL username |
+| `DB_PASSWORD` | MySQL password |
+| `JWT_SECRET` | Secret used for JWT signing |
 
-For a local MySQL installation, use this connection URL:
+For a local MySQL installation, the connection URL can be:
 
 ```text
 jdbc:mysql://localhost:3306/task_manager?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true
 ```
 
-Example configuration for Windows PowerShell:
+**Windows PowerShell example** (for the current terminal session):
 
 ```powershell
 $env:DB_URL="jdbc:mysql://localhost:3306/task_manager?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=Asia/Kolkata&allowPublicKeyRetrieval=true"
@@ -191,9 +182,9 @@ $env:DB_PASSWORD="your_mysql_password"
 $env:JWT_SECRET="your_secure_generated_secret"
 ```
 
-Replace the example values with your own credentials and a securely generated JWT secret.
+Replace the example values with your own configuration and a securely generated JWT secret.
 
-> **Security:** Never publish actual database passwords or JWT secrets in your repository.
+> **Security note:** Never publish actual database passwords or JWT secrets to GitHub. These PowerShell environment variables apply only to the current terminal session.
 
 ### Step 4: Run the Application
 
@@ -209,11 +200,11 @@ Alternatively, on Windows, try the included script:
 run.bat
 ```
 
-Make sure MySQL is running and all required environment variables are configured.
+Ensure MySQL is running and all required environment variables are configured before starting the application.
 
 ### Step 5: Open TaskFlow
 
-After the application starts successfully, open:
+Once the application starts successfully, open:
 
 **http://localhost:8080**
 
@@ -256,32 +247,17 @@ TaskFlow/
 
 ## 🔒 Security & Configuration
 
-- Database connection details are provided through environment variables.
+- Database connection details are supplied through environment variables.
 - JWT signing uses the `JWT_SECRET` environment variable.
-- Avoid committing credentials, private keys, production secrets, and database backups.
+- Never commit passwords, private keys, production secrets, or database backups.
 - Configure HTTPS and production database access before public deployment.
 - Review authentication, authorization, and CORS settings before production use.
 
 ---
 
-## 🌐 Live Demo
-
-<p align="center">
-  <a href="https://saurav-kumar-tech.github.io/TaskFlow/">
-    <img src="https://img.shields.io/badge/🚀-Open%20TaskFlow%20Page-2563EB?style=for-the-badge" alt="Open TaskFlow Page"/>
-  </a>
-</p>
-
-**GitHub Pages URL:**  
-https://saurav-kumar-tech.github.io/TaskFlow/
-
-> **Important:** This link opens the GitHub Pages page associated with this repository. GitHub Pages hosts static files; it does not run the Spring Boot backend or MySQL database. A fully functional online application requires the backend and database to be hosted separately. Verify that the actual application interface is published at this URL before presenting it as a working app demo.
-
----
-
 ## 🔮 Future Enhancements
 
-- [ ] Deploy the complete application with a production database
+- [ ] Deploy the application with a production database
 - [ ] Add email notifications and task reminders
 - [ ] Improve task filtering and search
 - [ ] Expand analytics and reporting
@@ -303,7 +279,7 @@ Java | Spring Boot | MySQL | Web Development
 
 ## 📄 License
 
-No license has been specified yet. Add an appropriate license if you intend to define how others may use, modify, or distribute this project.
+No license has been specified yet. Consider adding an appropriate license if you intend to define how others may use, modify, or distribute this project.
 
 ---
 
